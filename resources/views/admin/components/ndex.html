@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Tour Itinerary Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Travel & Tour</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tours</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Itineraries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+         
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-dark text-white text-center p-5">
+        <div class="container">
+            <h1>Manage Your Tour Itinerary</h1>
+            <p>Plan your trip and manage your schedule for the upcoming tour with ease.</p>
+        </div>
+    </section>
+
+    <!-- Itinerary Management Section -->
+    <section class="container my-5">
+        <h2 class="mb-4 text-center">Your Tour Itinerary</h2>
+
+        <!-- Itinerary Overview -->
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                Booking Details
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Tour: Amazing European Escape</h5>
+                <p class="card-text"><strong>Booking ID:</strong> #123456</p>
+                <p class="card-text"><strong>Date:</strong> October 25 - November 3, 2024</p>
+                <p class="card-text"><strong>Guests:</strong> 2 Adults, 1 Child</p>
+                <p class="card-text"><strong>Total Price:</strong> $4500.00</p>
+                <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i> Edit Booking</a>
+                <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Cancel Booking</a>
+            </div>
+        </div>
+
+        <!-- Daily Itinerary -->
+        <div class="accordion" id="itineraryAccordion">
+            <!-- Day 1 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="dayOneHeading">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dayOne" aria-expanded="true" aria-controls="dayOne">
+                        Day 1 - Arrival in Paris
+                    </button>
+                </h2>
+                <div id="dayOne" class="accordion-collapse collapse show" aria-labelledby="dayOneHeading" data-bs-parent="#itineraryAccordion">
+                    <div class="accordion-body">
+                        <p><strong>Arrival Time:</strong> 9:00 AM</p>
+                        <p><strong>Highlights:</strong> Visit Eiffel Tower, Seine River Cruise, Explore Champs-Élysées</p>
+                        <ul id="day1-activities">
+                            <!-- New activities will be appended here -->
+                        </ul>
+                        <a href="#" class="btn btn-outline-success btn-sm" onclick="addActivity('day1-activities')"><i class="fas fa-plus-circle"></i> Add Activity</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="dayTwoHeading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dayTwo" aria-expanded="false" aria-controls="dayTwo">
+                        Day 2 - Explore Paris Museums
+                    </button>
+                </h2>
+                <div id="dayTwo" class="accordion-collapse collapse" aria-labelledby="dayTwoHeading" data-bs-parent="#itineraryAccordion">
+                    <div class="accordion-body">
+                        <p><strong>Start Time:</strong> 10:00 AM</p>
+                        <p><strong>Highlights:</strong> Louvre Museum, Musée d'Orsay, Notre-Dame Cathedral</p>
+                        <ul id="day2-activities">
+                            <!-- New activities will be appended here -->
+                        </ul>
+                        <a href="#" class="btn btn-outline-success btn-sm" onclick="addActivity('day2-activities')"><i class="fas fa-plus-circle"></i> Add Activity</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="dayThreeHeading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dayThree" aria-expanded="false" aria-controls="dayThree">
+                        Day 3 - Train to Switzerland
+                    </button>
+                </h2>
+                <div id="dayThree" class="accordion-collapse collapse" aria-labelledby="dayThreeHeading" data-bs-parent="#itineraryAccordion">
+                    <div class="accordion-body">
+                        <p><strong>Start Time:</strong> 8:00 AM</p>
+                        <p><strong>Highlights:</strong> Scenic train ride to Interlaken, Swiss Alps</p>
+                        <ul id="day3-activities">
+                            <!-- New activities will be appended here -->
+                        </ul>
+                        <a href="#" class="btn btn-outline-success btn-sm" onclick="addActivity('day3-activities')"><i class="fas fa-plus-circle"></i> Add Activity</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more days similarly... -->
+        </div>
+
+        <!-- Additional Actions -->
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-secondary"><i class="fas fa-plus-circle"></i> Add More Days</a>
+            <a href="#" class="btn btn-info"><i class="fas fa-download"></i> Download Itinerary</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3">
+         <p>&copy; 2024 Travel & Tour. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+    </footer>
+
+    <!-- Bootstrap and FontAwesome Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
+    <!-- JavaScript Function to Add Activities -->
+    <script>
+        function addActivity(dayId) {
+            // Get the ID of the day where the activity should be added
+            const ulElement = document.getElementById(dayId);
+            
+            // Create a new list item (li) element
+            const liElement = document.createElement('li');
+            
+            // Prompt the user to enter the activity details
+            const activity = prompt('Enter new activity:');
+            
+            // Check if the user entered something
+            if (activity) {
+                // Set the content of the list item
+                liElement.textContent = activity;
+
+                // Append the new activity to the list
+                ulElement.appendChild(liElement);
+            } else {
+                alert('Activity cannot be empty.');
+            }
+        }
+    </script>
+</body>
+</html>

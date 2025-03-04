@@ -1,0 +1,44 @@
+/* Full-screen loader background */
+.loader-wrapper {
+    background: linear-gradient(180deg, #e0f7fa, #ffffff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+}
+
+/* Circle spinner */
+.circle {
+    width: 100px;
+    height: 100px;
+    border: 5px solid rgba(0, 123, 255, 0.3); /* Light blue border */
+    border-top: 5px solid #007bff; /* Darker blue for the rotating part */
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite; /* Smooth spinning */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Spinner animation */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Loading text */
+p {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #007bff;
+}
+
+.img-profile{
+    height: 30px;
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>travel and tours</title>
+    <link rel="icon" href="{{ asset('img/jvdlogo.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('assets/css/swiper-bundle.min.css')}}" />
+    
+    @vite('resources/css/app.css')
+    <wireui:scripts />
+    @livewireStyles
+    <!-- Datatable -->
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/responsive.dataTables.min.css')}}" />
+    
+    <link rel="stylesheet" href="{{ asset('assets/css/loader.css')}}" />
+
+  
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+</head>
