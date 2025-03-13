@@ -42,9 +42,16 @@ class AdminController extends Controller
     public function manage_flights(){
         return view('admin.components.manage-flights');
     }
-    public function manage_user_account(){
-        $data = User::all();
-        return view('admin.components.manage-user-account',compact('data'));
+
+    public function manage_user_account()
+    {
+        // Retrieve only users with role 'user'
+        $users = User::where('role', 'user')->get();
+
+        // Retrieve only users with role 'admin'
+        $admins = User::where('role', 'admin')->get();
+
+        return view('admin.components.manage-user-account', compact('users', 'admins'));
     }
 
     public function create_itinerary(){
