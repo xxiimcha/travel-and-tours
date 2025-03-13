@@ -12,7 +12,9 @@ use App\Http\Controllers\TourItineraryController;
 use App\Http\Controllers\FlightsItineraryController;
 
 //======================== ADMIN DASHBOARD UPDATED  ======================================
-Route::get('/admin_dashboard', [AdminController::class, 'AdminDashboard'])->name('dashboard');
+
+
+Route::get('/', [CustomerController::class, 'index'])->name('home');
 //================================================================================================
 //============================== CUSTOMER SIDE   AUTHENTICATION ===================================================
 // Routes accessible only by authenticated users
