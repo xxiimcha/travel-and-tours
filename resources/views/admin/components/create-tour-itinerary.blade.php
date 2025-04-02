@@ -2,167 +2,133 @@
 @include('admin/partials.sidebar')
 @include('admin/partials.top-content')
 
-
 <style>
-    /* Hide the default file input appearance */
-input[type="file"] {
-    display: block; /* Ensures it is visible */
-    padding: 10px; /* Add padding for better appearance */
-    border: 1px solid #ced4da; /* Add border */
-    border-radius: 0.25rem; /* Match Bootstrap input styling */
-    background-color: #f8f9fa; /* Optional: background color */
-}
+    input[type="file"] {
+        display: block;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        background-color: #f8f9fa;
+    }
 
-/* Customize the file input */
-input[type="file"]::-webkit-file-upload-button {
-    display: none; /* Hide the default button */
-}
+    input[type="file"]::-webkit-file-upload-button {
+        display: none;
+    }
 
+    #preview-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
 </style>
+
 <div class="container-fluid">
-
-
-    <div class="shadow-lg p-3 mb-5 bg-body rounded">
-            <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-muted">Create Tour Itinerary</h1>
-        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-5">
-            <form action="{{route('create_tour_itinerary')}}" method="POST" enctype="multipart/form-data">
-                @csrf
-            <label for="">Destination Name</label>
-           <select name="destination_name" id="" class="form-control text-muted @error('destination_name')
-               is-invalid
-           @enderror" >
-            <option value="" disabled selected> --- Select Category ---</option>   
-            @foreach ($data as $destination)
-            <option value="{{ $destination->id }}-{{ $destination->destination_name }}">{{ $destination->destination_name }}</option>
-        @endforeach    
-           </select>
-           @error('destination_name')
-           <span class="text-danger">{{$message }}</span>
-       @enderror
+    <div class="shadow-lg p-4 mb-5 bg-body rounded">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 text-muted">Create Tour Itinerary</h1>
         </div>
-    </div>
-        <div class="row justify-content-center">   
-            <div class="col-md-5">
-                <div class="mb-3">
-                    <label for="">Destinations category:</label>
-                    <input type="text" value="{{ old('destination_category')}}"  name="destination_category"  class="@error('destination_category') text-danger is-invalid @enderror form-control" value="" placeholder="enter your destination location">
-                    @error('destination_category')
-                    <span class="text-danger">{{$message }}</span>
-                @enderror
-                </div>
-            </div>
-            <div class="col-md-5">          
-                <div class="mb-3">
-                    <label for="">Day:</label>
-               <select name="daily_itinerary" id="" class="form-control text-muted @error('daily_itinerary')
-                   is-Invalid
-               @enderror ">
-                <option value="" disabled selected class="text-muted"> --- Select Day Of Itinerary ---</option>
-                <option value="Day 1">Day 1</option>
-                <option value="Day 2">Day 2</option>
-                <option value="Day 3">Day 3</option>
-                <option value="Day 4">Day 4</option>
-                <option value="Day 5">Day 5</option>
-                <option value="Day 6">Day 6</option>
-                <option value="Day 7">Day 7</option>
-                <option value="Day 8">Day 8</option>
-                <option value="Day 9">Day 9</option>
-                <option value="Day 10">Day 10</option>
-                <option value="Day 11">Day 11</option>
-                <option value="Day 12">Day 12</option>
-                <option value="Day 13">Day 13</option>
-                <option value="Day 14">Day 14</option>
-                <option value="Day 15">Day 15</option>
-               </select>        
-                    @error('daily_itinerary')
-                        <span class="text-danger">{{$message }}</span>
-                    @enderror
-                </div>             
-            </div>
-        </div>
+
         @if(session('success'))
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-    
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: '{{ session('success') }}',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+            </script>
+        @endif
 
-    
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: '{{ session('success') }}',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK'
-            });
-        </script>
-    @endif
-        <div class="row justify-content-center">
-          
-            <div class="col-md-5">
-          
-                <div class="mb-3">
-                    <label for="">Destinations Locations:</label>
-                    <input type="text" value="{{ old('destination_location')}}"  name="destination_location"  class="@error('destination_price') text-danger is-invalid @enderror form-control" value="" placeholder="enter your destination location">
-                    @error('destination_location')
-                    <span class="text-danger">{{$message }}</span>
-                @enderror
+        <form action="{{ route('create_tour_itinerary') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            <!-- Row 1: Destination Name -->
+            <div class="row mb-3 justify-content-center">
+                <div class="col-md-6">
+                    <label for="destination_name">Destination Name</label>
+                    <select name="destination_name" class="form-control @error('destination_name') is-invalid @enderror">
+                        <option value="" disabled selected>--- Select Category ---</option>
+                        @foreach ($data as $destination)
+                            <option value="{{ $destination->id }}-{{ $destination->destination_name }}">{{ $destination->destination_name }}</option>
+                        @endforeach
+                    </select>
+                    @error('destination_name') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
-         
-                
             </div>
-            <div class="col-md-5">
-                <div class="mb-3">
-                    <label for="">Itinerary Images:</label>
-                    <input type="file" name="image" class="@error('image') text-danger is-invalid @enderror form-control">
-                    @error('image')
-                    <span class="text-danger">{{ $message }}</span>
-                        
-                    @enderror
-                </div>     
+
+            <!-- Row 2: Category and Day -->
+            <div class="row mb-3 justify-content-center">
+                <div class="col-md-6">
+                    <label for="destination_category">Destination Category</label>
+                    <input type="text" name="destination_category" value="{{ old('destination_category') }}" class="form-control @error('destination_category') is-invalid @enderror" placeholder="Enter category">
+                    @error('destination_category') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="col-md-6">
+                    <label for="daily_itinerary">Day</label>
+                    <select name="daily_itinerary" class="form-control @error('daily_itinerary') is-invalid @enderror">
+                        <option value="" disabled selected>--- Select Day Of Itinerary ---</option>
+                        @for ($i = 1; $i <= 15; $i++)
+                            <option value="Day {{ $i }}">Day {{ $i }}</option>
+                        @endfor
+                    </select>
+                    @error('daily_itinerary') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
             </div>
+
+            <!-- Row 3: Location and Image Upload -->
+            <div class="row mb-3 justify-content-center">
+                <div class="col-md-6">
+                    <label for="destination_location">Destination Location</label>
+                    <input type="text" name="destination_location" value="{{ old('destination_location') }}" class="form-control @error('destination_location') is-invalid @enderror" placeholder="Enter location">
+                    @error('destination_location') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="col-md-6">
+                    <label for="image">Itinerary Image</label>
+                    <input type="file" name="image" id="image-input" class="form-control @error('image') is-invalid @enderror" accept="image/*">
+                    @error('image') <span class="text-danger">{{ $message }}</span> @enderror
+                    <div id="preview-container"></div>
+                </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-md-10 float-start ">
-           <div class="mb-3">
-               <label for="">Destination Description:</label>
-                <textarea name="destination_description" id="" rows="10"  class="form-control  @error('destination_description')  is-invalid @enderror">
-                </textarea>
-                @error('destination_description')
-                <span class="text-danger">{{$message }}</span>
-                 @enderror
-           </div>     
-              </div>
-            <div class="col-md-10 float-start mt-2" >
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>  
-        </form> 
-        </div>                
+
+            <!-- Row 4: Description -->
+            <div class="row mb-3 justify-content-center">
+                <div class="col-md-12">
+                    <label for="destination_description">Destination Description</label>
+                    <textarea name="destination_description" rows="6" class="form-control @error('destination_description') is-invalid @enderror">{{ old('destination_description') }}</textarea>
+                    @error('destination_description') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
             </div>
-        
+
+            <!-- Submit Button -->
+            <div class="row">
+                <div class="col text-end">
+                    <button type="submit" class="btn btn-primary px-4">Save</button>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 
-    @if(session('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: '{{ session('success') }}',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK'
-        });
-    </script>
-@endif
-   
- 
-    @include('admin/partials.footer')
+<script>
+    // Image preview script
+    document.getElementById('image-input').addEventListener('change', function (e) {
+        const previewContainer = document.getElementById('preview-container');
+        previewContainer.innerHTML = ''; // Clear previous preview
 
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (evt) {
+                const img = document.createElement('img');
+                img.src = evt.target.result;
+                previewContainer.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 
-
-
-
-
+@include('admin/partials.footer')
