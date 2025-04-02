@@ -20,17 +20,6 @@ Route::get('/tour-itinerary/{tourId}', [APIController::class, 'getTourItineraryB
 
 
 Route::get('/', [CustomerController::class, 'index'])->name('home');
-//================================================================================================
-//============================== CUSTOMER SIDE   AUTHENTICATION ===================================================
-// Routes accessible only by authenticated users
-
-    // Route::get('/tour-package', [CustomerController::class, 'tour_package'])->name('tour-package');
-    // Route::get('/rentals', [CustomerController::class, 'rentals'])->name('rentals');
-    // Route::get('/hotel-reservation', [CustomerController::class, 'hotel_resevation'])->name('hotel-reservation');
-    // Route::get('/flights', [CustomerController::class, 'flights'])->name('flights');
-    // Route::get('/user-dashboard', [HomepageController::class, 'user_dashboard'])->name('user-dahsboard');
-    // LOG OUT USER (accessible by authenticated users)
-
 
 // Routes for authenticated users only
 Route::middleware(['auth'])->group(function () {
