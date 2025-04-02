@@ -54,6 +54,12 @@ Route::middleware(['guest.redirect'])->group(function () {
 
     // Login account
     Route::post('/login-account', [AuthenticationController::class, 'login_user'])->name('login-account');
+
+    Route::get('/admin/login', [AuthenticationController::class, 'showAdminLoginForm'])->name('admin.login');
+
+    // Admin login submission
+    Route::post('/admin/login-account', [AuthenticationController::class, 'login_admin'])->name('admin.login-account');
+
 });
 
 

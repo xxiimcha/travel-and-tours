@@ -10,6 +10,17 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthenticationController extends Controller
 {
+    public function showAdminLoginForm()
+    {
+        return view('admin.admin-login'); // This points to your Blade file
+    }
+
+    public function login_admin(Request $request)
+    {
+        // Skip authentication for now
+        return redirect()->route('admin-dashboard');
+    }
+
     // SHOW REGISTRATION VIEW
     public function showRegistrationForm()
     {
