@@ -10,7 +10,12 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FlightsBookingController;
 use App\Http\Controllers\TourItineraryController;
 use App\Http\Controllers\FlightsItineraryController;
+use App\Http\Controllers\APIController;
 
+//API URLs
+
+Route::get('/tour-itineraries', [APIController::class, 'getTourItineraries']);
+Route::get('/tour-itinerary/{tourId}', [APIController::class, 'getTourItineraryByTourId']);
 //======================== ADMIN DASHBOARD UPDATED  ======================================
 
 

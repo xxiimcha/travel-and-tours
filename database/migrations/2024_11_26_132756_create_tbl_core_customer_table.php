@@ -14,19 +14,19 @@ return new class extends Migration
         if (!Schema::hasTable('tbl_core_customer')) { // Check if the table exists
             Schema::create('tbl_core_customer', function (Blueprint $table) {
                 $table->id();
-                $table->string('user_id'); // References 'users' table
+                $table->unsignedBigInteger('user_id'); // Fixed data type
                 $table->string('firstname');
                 $table->string('lastname');
                 $table->string('address');
                 $table->string('gender');
-                $table->string('email')->unique(); // Unique email
+                $table->string('email')->unique();
                 $table->string('phone_number');
                 $table->string('user_images')->nullable();
                 $table->timestamps();
-
-                // Define the foreign key constraint
+            
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             });
+            
         }
     }
 
